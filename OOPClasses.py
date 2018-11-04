@@ -1,5 +1,9 @@
+#Kaivalya Vohra 2018
+#import libraries
 from time import sleep
 from random import randint
+
+# initialize monster classes
 
 
 class Monster():
@@ -30,16 +34,14 @@ class Monster():
 
     def playTurn(self):
         moves = [self._attackName, self._defenseName]
-        turnNum = randint(1, self._health)
-        
-        
+        turnNum = randint(1, 2)
+
         if turnNum % 2:
-            print(self._name,"used", moves[0])
+            print(self._name, "used", moves[0])
             return(self._attackPower)
         else:
-            print(self._name,"used", moves[1])
+            print(self._name, "used", moves[1])
             return(-1)
-        
 
 
 class Vogon(Monster):
@@ -56,10 +58,13 @@ class Dragon(Monster):
     def __init__(self):
         super().__init__("Dragon", 25, "FireBreath", "Block")
 
+
 class Voldemort(Monster):
     def __init__(self):
         super().__init__("Voldemort", 30, "Crucio", "Expelliarmus(Block)")
 
+
+# initialize race classes
 class Race():
     def __init__(self, health, intellect, strength, speed, specialAttackName):
         self._health = health
@@ -110,6 +115,8 @@ class Droid(Race):
     def __init__(self):
         super().__init__(100, 100, 25, 25, "CyberStrike")
 
+# initialize class classes
+
 
 class CharacterClass():
     def __init__(self, attackPower, healPower, attackName, defenseName):
@@ -146,7 +153,9 @@ class Marksman(CharacterClass):
 
 class Mage(CharacterClass):
     def __init__(self):
-        super().__init__(45, 20, "Frostbolt", "CounterSpell")
+        super().__init__(45, 20, "Imperio Curse", "Patronus Charm")
+
+# initialize player class- uses composition for the race
 
 
 class Player():

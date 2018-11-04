@@ -1,16 +1,21 @@
+#Kaivalya Vohra 2018
+#import libraries
 from random import randint
 from time import sleep
 from scoring import *
 from OOPClasses import *
 
+#open highscores and print them
 textfile = open("highscores.txt", "r")
 scores = sorted(literal_eval(textfile.read()).items(),
                 key=lambda t: t[1], reverse=True)
 printscores(scores)
 
+
 print("\nWelcome to Crossover Quest. Mario just sent you an email from his holiday in Bali. Princess Peach has been kidnapped by Lord Voldemort.")
 x = input("You must go on a quest to rescue her. Enter anything to begin: ")
 sleep(0.7)
+#set up quest depending on difficulty level
 difficultyLevel = 0
 monsterList = [Vogon(), Dementor(), Dragon()]
 opponentList = []
@@ -29,8 +34,9 @@ for i in range(0,difficultyLevel):
     monsterCounter = randint(0, len(monsterList) - 1)
     opponentList.append(monsterList[monsterCounter])
 opponentList.append(Voldemort())
-print(opponentList)
 
+
+#Use aggregation to add class
 sleep(0.75)
 while True:
     try:
@@ -46,6 +52,8 @@ classList = ["", Fighter(), Marksman(), Mage()]
 myPlayer = Player(classList[playerClassInput])
 
 
+
+#each move function
 def makeMove(player, opponent):
     playerMove = player.doMove()
     oppMove = opponent.playTurn()
@@ -56,7 +64,7 @@ def makeMove(player, opponent):
             print("\nOpponent succesully blocked your move.")
         else:
             attackChance = randint(1, myPlayer.Race.getSpeed())
-            if attackChance > 10:
+            if attackChance > 5:
                 print("\nYou succesfully attacked and dealt",
                       playerMove, "damage.")
                 opponent.setHealth(opponent.getHealth() - playerMove)
@@ -66,7 +74,7 @@ def makeMove(player, opponent):
     if oppMove > 0:
         if playerMove == -1:
             blockChance = randint(1, myPlayer.Race.getSpeed())
-            if blockChance > 15:
+            if blockChance > 5:
                 print("\nYou blocked the opponents move.")
             else:
                 print("Sorry. You were too slow.")
@@ -81,6 +89,7 @@ def makeMove(player, opponent):
 opp1 = Dragon()
 
 
+#loop through opponents
 for i in range(0, len(opponentList)):
     opp1 = opponentList[i]
     print("\n\nYou are facing a", opp1.getName())
@@ -102,6 +111,7 @@ for i in range(0, len(opponentList)):
             break
 sleep(1)
 print("\nCongratulations.\nYou have succesfully completed your quest and saved Princess Peach. Mario is eternally greatful.")
+#take username input for highscores
 while True:
     username=input("Enter your 3 letter long gamer tag: ")
     if len(username)==3:
